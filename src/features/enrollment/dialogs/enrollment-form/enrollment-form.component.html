@@ -1,0 +1,23 @@
+<form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()" class="grid m-3">
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="courseId">
+                <mat-option value="" selected>Seleccione un curso</mat-option>
+                <mat-option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Alumno</mat-label>
+            <mat-select formControlName="studentId">
+                <mat-option value="" selected>Seleccione un alumno</mat-option>
+                <mat-option *ngFor="let student of students" [value]="student.id">{{ student | fullname }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 flex justify-content-end">
+        <button mat-flat-button color="primary">Guardar</button>
+    </div>
+</form>

@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Detalle del curso</h2>
+
+<mat-dialog-content>
+    <div class="ml-3">
+        <p><strong>ID:</strong> {{ course.id }}</p>
+        <p><strong>Nombre:</strong> {{ course.name }}</p>
+        <p><strong>Fecha desde:</strong> {{ course.dateFrom | date : 'dd/MM/yyyy' }}</p>
+        <p><strong>Fecha hasta:</strong> {{ course.dateTo | date : 'dd/MM/yyyy' }}</p>
+    </div>
+
+    <h4>Alumnos</h4>
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mt-3">
+
+        <ng-container matColumnDef="id">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let student">{{ student.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>Nombre completo</th>
+            <td mat-cell *matCellDef="let student">
+                {{ student | fullname }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="documentNro">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>Nro Documento</th>
+            <td mat-cell *matCellDef="let student">
+                {{ student.documentNro }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let student">
+                {{ student.email }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="registrationDate">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>Fecha de insc.</th>
+            <td mat-cell *matCellDef="let student">
+                {{ student.registrationDate | date : 'dd/MM/yyyy' }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th appHeaderFont mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let student">
+                <button mat-icon-button (click)="unenroll(student)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-dialog-close mat-flat-button color="primary">Cerrar</button>
+</mat-dialog-actions>

@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "email": "admin@mail.com",
+      "password": "123456",
+      "role": "ADMIN",
+      "token": "lkj234kj23lk4j2l3j4f2342lk3j4fl2j34"
+    },
+    {
+      "id": "2",
+      "firstName": "User",
+      "lastName": "User",
+      "email": "user@mail.com",
+      "password": "123456",
+      "role": "USER",
+      "token": "12123123hjh2v34g4c24cvjhv1jh23bjhkj"
+    }
+  ],
+  "courses": [
+    {
+      "id": "7af3",
+      "name": "Curso Angular",
+      "description": "Curso de Angular básico",
+      "dateFrom": "2024-03-04T03:00:00.000Z",
+      "dateTo": "2024-11-22T03:00:00.000Z"
+    },
+    {
+      "id": "6a08",
+      "name": "Curso React",
+      "description": "Curso de React básico",
+      "dateFrom": "2024-02-01T03:00:00.000Z",
+      "dateTo": "2024-10-31T03:00:00.000Z"
+    }
+  ],
+  "students": [
+    {
+      "id": "91d7",
+      "firstName": "Juan",
+      "lastName": "Perez",
+      "documentNro": 123456,
+      "email": "juan@mail.com",
+      "registrationDate": "2024-02-14T19:47:28.755Z"
+    },
+    {
+      "id": "489d",
+      "firstName": "Carlos",
+      "lastName": "Gomez",
+      "documentNro": 234567,
+      "email": "carlos@mail.com",
+      "registrationDate": "2024-02-14T19:58:21.651Z"
+    },
+    {
+      "id": "37a6",
+      "firstName": "Maria",
+      "lastName": "Lopez",
+      "documentNro": 2349824,
+      "email": "maria@mail.com",
+      "registrationDate": "2024-02-14T23:40:10.185Z"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "a8fb",
+      "courseId": "7af3",
+      "studentId": "37a6",
+      "date": "2024-02-14T23:40:52.363Z"
+    },
+    {
+      "id": "a2f5",
+      "courseId": "7af3",
+      "studentId": "489d",
+      "date": "2024-02-14T23:41:24.449Z"
+    }
+  ]
+}

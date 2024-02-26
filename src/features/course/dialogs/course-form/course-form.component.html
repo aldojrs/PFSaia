@@ -1,0 +1,33 @@
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="grid m-3">
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput type="text" />
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Descripción</mat-label>
+            <input formControlName="description" matInput type="text" maxlength="60" />
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Fecha desde</mat-label>
+            <input formControlName="dateFrom" matInput [matDatepicker]="dateFromPicker" />
+            <mat-datepicker-toggle matIconSuffix [for]="dateFromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateFromPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Fecha hasta</mat-label>
+            <input formControlName="dateTo" matInput [matDatepicker]="dateToPicker" />
+            <mat-datepicker-toggle matIconSuffix [for]="dateToPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateToPicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-12 flex justify-content-end">
+        <button mat-flat-button color="primary">Guardar</button>
+    </div>
+</form>
