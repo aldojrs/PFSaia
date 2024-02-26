@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,6 +9,10 @@ import es from '@angular/common/locales/es';
 import esAR from '@angular/common/locales/es-AR';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { appReducers } from '../core/store';
 
 registerLocaleData(es);
 registerLocaleData(esAR);
@@ -23,6 +27,9 @@ registerLocaleData(esAR);
         AppRoutingModule,
         MaterialModule,
         HttpClientModule,
+        StoreModule.forRoot(appReducers, {}),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+        EffectsModule.forRoot([]),
     ],
     providers: [
         {

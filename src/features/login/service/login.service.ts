@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Login, User } from '../models';
+import { Login } from '../models';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Role, User } from '../../user/models';
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +37,7 @@ export class LoginService {
     isUserAdmin(): Observable<boolean> {
         return this.verifyToken().pipe(
             map((users: User[]) => {
-                return users[0]?.role === 'ADMIN';
+                return users[0]?.role === Role.ADMIN;
             })
         );
     }

@@ -6,7 +6,7 @@
     <button *ngIf="isUserLogged" mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
     </button>
-    <h1>Curso Angular - Tercera entrega</h1>
+    <h1>Curso Angular - Entrega final</h1>
 </mat-toolbar>
 
 <mat-sidenav-container autosize *ngIf="isUserLogged">
@@ -38,6 +38,13 @@
                 <span class="entry">
                     <mat-icon>assignment_turned_in</mat-icon>
                     <span>Inscripciones</span>
+                </span>
+            </a>
+            <a mat-list-item #userLink="routerLinkActive" routerLinkActive [activated]="userLink.isActive"
+                routerLink="user">
+                <span class="entry">
+                    <mat-icon>person_add</mat-icon>
+                    <span>Usuarios</span>
                 </span>
             </a>
             <a mat-list-item (click)="logout()">
