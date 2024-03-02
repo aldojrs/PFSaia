@@ -23,7 +23,6 @@ export const reducer = createReducer(
     initialState,
     on(UserActions.loadUsers, (state) => ({ ...state })),
     on(UserActions.loadUsersSuccess, (state, action) => ({ ...state, users: action.data })),
-    on(UserActions.loadUsersFailure, (state, action) => ({ ...state, error: action.error })),
 
     on(UserActions.createUser, (state, action) => ({ ...state, user: action.data })), 
     on(UserActions.updateUser, (state, action) => ({ ...state, user: action.data })),

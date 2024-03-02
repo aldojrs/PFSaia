@@ -48,6 +48,9 @@ export class LoginService {
                     if (!users[0]) {
                         this.isLogedTriggered$.next(false);
                         localStorage.removeItem('token');
+                    } else {
+                        this.isLogedTriggered$.next(true);
+                        this.isAdminTriggered$.next(users[0]?.role === Role.ADMIN);
                     }
                 })
             );

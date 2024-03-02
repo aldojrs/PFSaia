@@ -52,14 +52,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 const userEdited = { ...user, ...result };
 
                 this.store.dispatch(UserActions.updateUser({ data: userEdited }));
-                this.updateSubscripion = this.store.select(updateUser).subscribe({
-                    next: () => {
-                        this._snackBar.open('Usuario actualizado correctamente', 'Ok', { duration: 3000 });
-                    },
-                    error: (error) => {
-                        this._snackBar.open(error, 'Ok', { duration: 3000 });
-                    }
-                });
+                this.updateSubscripion = this.store.select(updateUser).subscribe();
             } else { // If the user is null, it means that we are creating a new user
                 const userCreated = { ...result };
 
@@ -67,14 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
                 userCreated.token = Math.random().toString(36).substring(2, 15); // random token
 
                 this.store.dispatch(UserActions.createUser({ data: userCreated }));
-                this.createSubscripion = this.store.select(createUser).subscribe({
-                    next: () => {
-                        this._snackBar.open('Usuario actualizado correctamente', 'Ok', { duration: 3000 });
-                    },
-                    error: (error) => {
-                        this._snackBar.open(error, 'Ok', { duration: 3000 });
-                    }
-                });
+                this.createSubscripion = this.store.select(createUser).subscribe();
             }
         });
     }
@@ -93,9 +79,7 @@ export class UserComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             if (confirmed) {
                 this.store.dispatch(UserActions.deleteUser({ id: user.id }));
-                this.deleteSubscripion = this.store.select(deleteUser).subscribe(() => {
-                    this._snackBar.open('Usuario eliminado correctamente', 'Ok', { duration: 3000 });
-                });
+                this.deleteSubscripion = this.store.select(deleteUser).subscribe();
             }
         });
     }
