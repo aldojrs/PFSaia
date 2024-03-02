@@ -1,22 +1,22 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": "8716",
       "firstName": "Admin",
       "lastName": "Admin",
       "email": "admin@mail.com",
-      "password": "123456",
       "role": "ADMIN",
-      "token": "lkj234kj23lk4j2l3j4f2342lk3j4fl2j34"
+      "password": "123456",
+      "token": "78ynshevefu"
     },
     {
-      "id": "2",
+      "id": "11c3",
       "firstName": "User",
       "lastName": "User",
       "email": "user@mail.com",
-      "password": "123456",
       "role": "USER",
-      "token": "12123123hjh2v34g4c24cvjhv1jh23bjhkj"
+      "password": "123456",
+      "token": "opf3usmnvrj"
     }
   ],
   "courses": [
@@ -73,6 +73,12 @@
       "courseId": "7af3",
       "studentId": "489d",
       "date": "2024-02-14T23:41:24.449Z"
+    },
+    {
+      "id": "c0e8",
+      "courseId": "6a08",
+      "studentId": "37a6",
+      "date": "2024-03-02T15:28:39.578Z"
     }
   ]
 }

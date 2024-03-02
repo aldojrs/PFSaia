@@ -39,10 +39,10 @@
                 <button mat-icon-button (click)="openCourseDetail(course)">
                     <mat-icon aria-label="Detail">visibility</mat-icon>
                 </button>
-                <button *ngIf="isUserAdmin" mat-icon-button (click)="openCourseForm(course)">
+                <button *ngIf="isUserAdmin$ | async" mat-icon-button (click)="openCourseForm(course)">
                     <mat-icon aria-label="Edit">edit</mat-icon>
                 </button>
-                <button *ngIf="isUserAdmin" mat-icon-button (click)="deleteCourse(course)">
+                <button *ngIf="isUserAdmin$ | async" mat-icon-button (click)="deleteCourse(course)">
                     <mat-icon aria-label="Delete">delete</mat-icon>
                 </button>
             </td>

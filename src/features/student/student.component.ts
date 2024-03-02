@@ -18,16 +18,14 @@ export class StudentComponent implements OnInit {
     displayedColumns: string[] = ['id', 'fullName', 'documentNro', 'email', 'registrationDate', 'actions'];
     dataSource!: Student[];
 
-    isUserAdmin: boolean = false;
+    isUserAdmin$;
 
-    constructor(private studentService: StudentService, private loadingService: LoadingService, 
-        private loginService: LoginService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+    constructor(private studentService: StudentService, private loadingService: LoadingService,
+        private loginService: LoginService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
+        this.isUserAdmin$ = this.loginService.isAdmin$;
+    }
 
     ngOnInit(): void {
-        this.loginService.isUserAdmin().subscribe((isAdmin) => {
-            this.isUserAdmin = isAdmin;
-        });
-
         this.loadData();
     }
 

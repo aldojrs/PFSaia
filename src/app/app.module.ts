@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducers } from '../core/store';
+import { SharedModule } from '../shared/shared.module';
 
 registerLocaleData(es);
 registerLocaleData(esAR);
@@ -27,6 +28,7 @@ registerLocaleData(esAR);
         AppRoutingModule,
         MaterialModule,
         HttpClientModule,
+        SharedModule,
         StoreModule.forRoot(appReducers, {}),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
         EffectsModule.forRoot([]),

@@ -4,21 +4,30 @@ import { User } from '../models';
 
 export const usersFeatureKey = 'users';
 
-export interface State {
+export interface UsersState {
     users: User[];
-    loading: boolean;
     error: unknown;
 }
 
-export const initialState: State = {
+export interface UserState {
+    user: User;
+    error: unknown;
+}
+
+export const initialState: UsersState = {
     users: [],
-    loading: false,
     error: null,
 };
 
 export const reducer = createReducer(
     initialState,
-    on(UserActions.loadUsers, (state) => ({ ...state, loading: true })),
+    on(UserActions.loadUsers, (state) => ({ ...state })),
+    on(UserActions.loadUsersSuccess, (state, action) => ({ ...state, users: action.data })),
+    on(UserActions.loadUsersFailure, (state, action) => ({ ...state, error: action.error })),
+
+    on(UserActions.createUser, (state, action) => ({ ...state, user: action.data })), 
+    on(UserActions.updateUser, (state, action) => ({ ...state, user: action.data })),
+    on(UserActions.deleteUser, (state, action) => ({ ...state, user: action.id })),
 );
 
 export const usersFeature = createFeature({

@@ -4,6 +4,8 @@ import { LoadingService } from '../core/services/loading.service';
 import { LoginService } from '../features/login/service/login.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from '../features/user/models';
+import { UserService } from '../features/user/service/user.service';
 
 @Component({
     selector: 'app-root',
@@ -16,11 +18,17 @@ export class AppComponent implements OnDestroy {
 
     loadingSubscription?: Subscription;
     isLoggedSubscription?: Subscription;
+    isAdmiSubscription?: Subscription;
 
     isLoading = false;
     isUserLogged = false;
+    isAdmin = false;
+    loggedUser: User | undefined;
+    selectedSection = 'Home';
 
-    constructor(private router: Router, private loadingService: LoadingService, private loginService: LoginService) {
+    constructor(private router: Router, private loadingService: LoadingService,
+        private loginService: LoginService, private userService: UserService) {
+        
         this.loadingSubscription = this.loadingService.isLoading$.subscribe({
             next: (loading) => {
                 setTimeout(() => {
@@ -33,8 +41,27 @@ export class AppComponent implements OnDestroy {
             next: (isLogged) => {
                 setTimeout(() => {
                     this.isUserLogged = isLogged;
+                    this.getLoggedUser();
                 });
             },
+        });
+
+        this.isAdmiSubscription = this.loginService.isAdmin$.subscribe({
+            next: (isAdmin) => {
+                setTimeout(() => {
+                    this.isAdmin = isAdmin;
+                });
+            },
+        });
+    }
+
+    getLoggedUser() {
+        if (!this.isUserLogged) {
+            return;
+        }
+
+        this.userService.getLoggedUser().subscribe((user) => {
+            this.loggedUser = user;
         });
     }
 
@@ -43,13 +70,19 @@ export class AppComponent implements OnDestroy {
     }
 
     logout() {
+        this.loggedUser = undefined;
         this.loginService.logout();
         this.router.navigate(['login']);
+    }
+
+    changeSection(section: string) {
+        this.selectedSection = section;
     }
 
     ngOnDestroy(): void {
         this.loadingSubscription?.unsubscribe();
         this.isLoggedSubscription?.unsubscribe();
+        this.isAdmiSubscription?.unsubscribe();
     }
 
 }

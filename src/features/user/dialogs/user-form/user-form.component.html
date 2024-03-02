@@ -1,0 +1,32 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="grid m-3">
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="firstName" matInput type="text" />
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Apellido</mat-label>
+            <input formControlName="lastName" matInput type="text" />
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email" />
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-full">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="role">
+                <mat-option value="" selected>Seleccione un rol</mat-option>
+                <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 flex justify-content-end">
+        <button mat-flat-button color="primary">Guardar</button>
+    </div>
+</form>

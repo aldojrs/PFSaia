@@ -18,16 +18,14 @@ export class CourseComponent {
     displayedColumns: string[] = ['id', 'name', 'description', 'dateFrom', 'dateTo', 'actions'];
     dataSource!: Course[];
 
-    isUserAdmin: boolean = false;
+    isUserAdmin$;
 
-    constructor(private courseService: CourseService, private loadingService: LoadingService, 
-        private loginService: LoginService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+    constructor(private courseService: CourseService, private loadingService: LoadingService,
+        private loginService: LoginService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
+        this.isUserAdmin$ = this.loginService.isAdmin$;
+    }
 
     ngOnInit(): void {
-        this.loginService.isUserAdmin().subscribe((isAdmin) => {
-            this.isUserAdmin = isAdmin;
-        });
-
         this.loadData();
     }
 

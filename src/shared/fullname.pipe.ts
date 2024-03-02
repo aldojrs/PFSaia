@@ -10,7 +10,12 @@ export interface UserPipe {
 })
 export class FullnamePipe implements PipeTransform {
 
-  transform(value: UserPipe, mode?: 'uppercase' | 'lowercase'): string {
+  transform(value?: UserPipe, mode?: 'uppercase' | 'lowercase'): string {
+
+    if (!value) {
+      return '';
+    }
+
     const result = value.firstName + ' ' + value.lastName;
 
     if (mode === 'uppercase') {

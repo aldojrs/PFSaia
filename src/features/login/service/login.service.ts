@@ -12,6 +12,9 @@ export class LoginService {
     private isLogedTriggered$ = new BehaviorSubject<boolean>(true);
     public isLoged$ = this.isLogedTriggered$.asObservable();
 
+    private isAdminTriggered$ = new BehaviorSubject<boolean>(false);
+    public isAdmin$ = this.isAdminTriggered$.asObservable();
+
     constructor(private httpClient: HttpClient) { }
 
     login(data: Login): Observable<User[]> {
@@ -19,25 +22,21 @@ export class LoginService {
             .pipe(
                 tap((users: User[]) => {
                     if (users[0]) {
-                        localStorage.setItem('token', users[0].token);
                         this.isLogedTriggered$.next(true);
+                        this.isAdminTriggered$.next(users[0]?.role === Role.ADMIN);
+                        localStorage.setItem('token', users[0].token);
                     }
                 })
             );
     }
 
-    isUserLogged(): Observable<boolean> {
-        return this.verifyToken().pipe(
-            map((users: User[]) => {
-                return !!users[0];
-            })
-        );
-    }
-
     isUserAdmin(): Observable<boolean> {
         return this.verifyToken().pipe(
             map((users: User[]) => {
-                return users[0]?.role === Role.ADMIN;
+                const isAdmin = users[0]?.role === Role.ADMIN;
+                this.isAdminTriggered$.next(isAdmin);
+
+                return isAdmin;
             })
         );
     }
@@ -47,16 +46,17 @@ export class LoginService {
             .pipe(
                 tap((users: User[]) => {
                     if (!users[0]) {
-                        localStorage.removeItem('token');
                         this.isLogedTriggered$.next(false);
+                        localStorage.removeItem('token');
                     }
                 })
             );
     }
 
     logout(): void {
-        localStorage.removeItem('token');
+        this.isAdminTriggered$.next(false);
         this.isLogedTriggered$.next(false);
+        localStorage.removeItem('token');
     }
 
 }
