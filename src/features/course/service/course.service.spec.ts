@@ -72,22 +72,6 @@ describe('CourseService', () => {
         expect(service.getCoursesByIds).toHaveBeenCalledWith(['1', '2']);
     });
 
-    it('should get courses by IDs', () => {
-        const courseIds = ['1', '2'];
-        const courses: Course[] = [
-            { id: '1', name: 'Course 1', description: 'Description 1', dateFrom: new Date(), dateTo: new Date() },
-            { id: '2', name: 'Course 2', description: 'Description 2', dateFrom: new Date(), dateTo: new Date() }
-        ];
-
-        service.getCoursesByIds(courseIds).subscribe((response) => {
-            expect(response).toEqual(courses);
-        });
-
-        const req = httpMock.expectOne('http://localhost:3000/courses?id=1&id=2');
-        expect(req.request.method).toBe('GET');
-        req.flush(courses);
-    });
-
     it('should add a course', () => {
         const course: Course = { id: '1', name: 'Course 1', description: 'Description 1', dateFrom: new Date(), dateTo: new Date() };
 

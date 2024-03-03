@@ -90,7 +90,7 @@ export class CourseComponent {
             if (!confirmed) return;
             this.loadingService.setIsLoading(true);
             this.courseService.deleteCourse(course.id).subscribe((course) => {
-                this.dataSource = this.dataSource.filter(c => c.id !== course.id);
+                this.dataSource = this.dataSource?.filter(c => c.id !== course.id);
                 this.loadingService.setIsLoading(false)
                 this._snackBar.open('Curso eliminado correctamente', 'Ok', { duration: 3000 });
             });
